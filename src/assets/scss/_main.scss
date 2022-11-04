@@ -20,3 +20,31 @@ input::placeholder {
     -webkit-line-clamp: 7;
   }
 }
+
+.owl-nav{
+  position: absolute;
+  top: calc(50% - 20px);
+  margin: 0;
+  width: 100%;
+  .owl-prev,.owl-next{
+    position: absolute !important;
+    left: -20px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 25px !important;
+    padding: 17px 10px !important;
+    font-size: 25px !important;
+    line-height: 0;
+    background: #fff !important;
+    color: #BDBDBD !important;
+    box-shadow: 0 2px 15px 0 rgb(0 0 0 / 20%);
+    &:hover{
+      background: var(--primary-color) !important;
+      color: #fff !important;
+    }
+  }
+  .owl-next{
+    right: -20px !important;
+    left: auto !important;
+  }
+}

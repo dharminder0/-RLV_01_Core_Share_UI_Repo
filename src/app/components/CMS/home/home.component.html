@@ -4,7 +4,7 @@
 
 <section class="doctors-list d-section">
     <div class="row m-0">
-        <div class="col-sm-4 pleft-40">
+        <div class="col-sm-4">
             <h2>Book Our Doctor</h2>
             <p>Lorem Ipsum is simply dummy text </p>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when
@@ -12,7 +12,7 @@
 
                 <button class="btn btn-primary mtop-20">Book appointment</button>
         </div>
-        <div class="col-sm-8 p-0">
+        <div class="col-sm-8">
             <owl-carousel-o [options]="owlOptions">
                 <ng-container *ngFor="let item of doctorsList">
                     <ng-template carouselSlide [id]="item.id">
@@ -68,8 +68,6 @@
             <p>Lorem Ipsum is simply dummy text </p>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when
                 looking at its layout. The point of using Lorem Ipsum.</p>
-
-                <button class="btn btn-primary mtop-20">Book appointment</button>
         </div>
     </div>
 </section>

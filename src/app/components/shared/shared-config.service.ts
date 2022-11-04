@@ -14,7 +14,7 @@ export class SharedConfigService {
     dots: false,
     navSpeed: 700,
     margin: 10,
-    navText: ['&#8249', '&#8250;'],
+    navText: ['&#x2190;', '&#x2192;'],
     responsive: {
       0: {
         items: 1 

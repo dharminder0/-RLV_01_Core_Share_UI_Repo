@@ -1,0 +1,12 @@
+<div class="banner-area"></div>
+
+<div class="container">
+    <div>Some tags before</div>
+    <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide *ngFor="let item of slides">
+            <img [src]="item.img" alt="image">
+        </ng-template>
+    </owl-carousel-o>
+    <div>Some tags after</div>
+
+</div>

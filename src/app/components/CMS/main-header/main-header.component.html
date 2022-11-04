@@ -1,0 +1,90 @@
+<header>
+  <div class="first-row p-all-10">
+    <div class="container topbar d-flex flex-wrap">
+      <div class="topbar-left">
+        <a class="navbar-brand mr-auto" [routerLink]="['./home']">
+          <img class="brand-logo" [src]="headerDetails.logo">
+        </a>
+      </div>
+      <div class="topbar-right mleft-auto align-items-center d-flex">
+        <div class="call-to-action">
+          <div class="d-inline-flex">
+            <svg class="mright-5 mtop-8" id="phone" xmlns="http://www.w3.org/2000/svg" width="29.824" height="29.79" viewBox="0 0 29.824 29.79">
+              <path id="Path_694" data-name="Path 694" d="M114.625,38.486a3.816,3.816,0,0,0-1.871-2.831l-1.912-1.142a4.188,4.188,0,0,0-4.693.24l-1.655,1.225h0a3.443,3.443,0,0,1-3.841.2A21.3,21.3,0,0,1,93.385,28.9a3.443,3.443,0,0,1,.2-3.841L94.8,23.405h0a4.2,4.2,0,0,0,.248-4.7l-1.117-1.879A3.741,3.741,0,0,0,91.142,15a4.031,4.031,0,0,0-3.369,1.2L87,16.982A7.449,7.449,0,0,0,84.9,23.239a25.345,25.345,0,0,0,21.446,21.438,7.163,7.163,0,0,0,1.035.075,7.45,7.45,0,0,0,5.239-2.169l.911-.9h0a3.815,3.815,0,0,0,1.093-3.195Zm-2.268,2.02-.935.944a5.794,5.794,0,0,1-4.875,1.655A23.689,23.689,0,0,1,86.54,23.033a5.794,5.794,0,0,1,1.6-4.875l.828-.778a2.483,2.483,0,0,1,1.97-.762,2.136,2.136,0,0,1,1.573,1.035l1.142,1.9a2.566,2.566,0,0,1-.141,2.855l-1.233,1.656a5.074,5.074,0,0,0-.29,5.686,22.815,22.815,0,0,0,7.83,7.838,5.074,5.074,0,0,0,5.7-.281l1.655-1.225h0a2.541,2.541,0,0,1,2.847-.149l1.912,1.151h0a2.16,2.16,0,0,1,1.035,1.6,2.184,2.184,0,0,1-.646,1.821Z" transform="translate(-84.832 -14.962)" fill="#0e8387"/>
+              <path id="Path_695" data-name="Path 695" d="M336.091,141.652a6.208,6.208,0,0,1,6.208,6.208.828.828,0,1,0,1.655,0A7.871,7.871,0,0,0,336.09,140a.828.828,0,1,0,0,1.655Z" transform="translate(-321.197 -132.961)" fill="#0e8387"/>
+              <path id="Path_696" data-name="Path 696" d="M336.088,79.016a9.734,9.734,0,0,1,9.726,9.726.828.828,0,0,0,1.656,0A11.4,11.4,0,0,0,336.087,77.36a.828.828,0,0,0,0,1.656Z" transform="translate(-321.194 -73.843)" fill="#0e8387"/>
+              <path id="Path_697" data-name="Path 697" d="M336.088,16.391a13.243,13.243,0,0,1,13.243,13.243.828.828,0,1,0,1.655,0,14.9,14.9,0,0,0-14.9-14.9.828.828,0,1,0,0,1.655Z" transform="translate(-321.194 -14.735)" fill="#0e8387"/>
+            </svg>
+            <div>
+              <div class="fs-11">Call us for any question</div>
+              <div class="fw-bolder">{{headerDetails.supportPhone}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="call-to-action mleft-45">
+          <div class="d-inline-flex">
+            <svg class="mright-5 mtop-8" xmlns="http://www.w3.org/2000/svg" width="26.12" height="26.12" viewBox="0 0 26.12 26.12">
+              <g id="email" transform="translate(-1108.426 -27.75)">
+                <path id="Path_700" data-name="Path 700" d="M213.286,200.282h12.137a.4.4,0,1,0,0-.8H213.286a.4.4,0,0,0,0,.8Z" transform="translate(902.131 -162.47)" fill="#0e8387" stroke="#0f8387" stroke-width="0.5"/>
+                <path id="Path_701" data-name="Path 701" d="M213.286,257.972h12.137a.4.4,0,1,0,0-.8H213.286a.4.4,0,1,0,0,.8Z" transform="translate(902.131 -217.439)" fill="#0e8387" stroke="#0f8387" stroke-width="0.5"/>
+                <path id="Path_702" data-name="Path 702" d="M104.088,18.319l-.012-.024a.173.173,0,0,0-.016-.028.7.7,0,0,0-.04-.076c0-.008-.012-.008-.02-.016a.092.092,0,0,0-.012-.02c-.016-.016-.032-.028-.048-.044l-3.323-2.382V8.888a.4.4,0,0,0-.4-.4H82.388a.4.4,0,0,0-.4.4v6.841l-3.295,2.362c-.008,0-.012.012-.016.016s-.012.008-.016.012a.4.4,0,0,0-.072.068l-.012.012a.072.072,0,0,1-.016.02,0,0,0,0,1,0,0,.494.494,0,0,0-.048.1v0a.328.328,0,0,0-.02.108V33.707a.4.4,0,0,0,.4.4h24.819a.4.4,0,0,0,.4-.4V18.443a.426.426,0,0,0-.02-.124Zm-24.8.9,9.567,6.853-9.567,6.849Zm10.252,7.346,1.525,1.093a.4.4,0,0,0,.464,0l1.525-1.093,9.407,6.737H80.137Zm4.2-.5,9.563-6.849v13.7Zm9.275-7.63-2.41,1.725V16.714ZM99.808,9.288V20.741l-8.511,6.1-8.511-6.1V9.287ZM81.987,20.168l-2.41-1.725,2.41-1.729Z" transform="translate(1030.187 19.512)" fill="#0e8387" stroke="#0f8387" stroke-width="0.5"/>
+                <path id="Path_698" data-name="Path 698" d="M266.316,84.968h7.133a.4.4,0,0,0,0-.8h-7.133a.4.4,0,0,0,0,.8Z" transform="translate(851.603 -52.597)" fill="#0e8387" stroke="#0f8387" stroke-width="0.5"/>
+                <path id="Path_699" data-name="Path 699" d="M213.286,142.582h12.137a.4.4,0,1,0,0-.8H213.286a.4.4,0,0,0,0,.8Z" transform="translate(902.131 -107.493)" fill="#0e8387" stroke="#0f8387" stroke-width="0.5"/>
+              </g>
+            </svg>
+            <div>
+              <div class="fs-11">Talk to our support team</div>
+              <div class="fw-bolder">{{headerDetails.supportEmail}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="call-to-action mleft-45">
+          <button class="btn btn-primary">Get Quote</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="second-row p-all-10">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="search-area mtop-5">
+            <input class="fs-12" type="text" name="search"
+              placeholder="Search by disease, procedure, doctor or hospital">
+            <fa-icon class="search-icon pointer" [icon]="faSearch"></fa-icon>
+          </div>
+        </div>
+        <div class="col-md-9 text-right">
+          <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav d-block">
+                  <li class="nav-item d-inline-block" *ngFor="let menu of headerMenu"
+                    [ngClass]="{'dropdown': menu.subMenu && menu.subMenu.length > 0}">
+                    <a class="nav-link" [ngClass]="{'active': selectedMenu == menu.code}"
+                      *ngIf="!(menu.subMenu && menu.subMenu.length > 0)" aria-current="page" href="#"
+                      (click)="selectedMenu = menu.code" [routerLink]="['./'+menu.code]">{{menu.label}}</a>
+                    <a class="nav-link dropdown-toggle" (click)="selectedMenu = menu.code" [routerLink]="['./'+menu.code]" [ngClass]="{'active': selectedMenu == menu.code}"
+                      *ngIf="menu.subMenu && menu.subMenu.length > 0" id="{{menu.code}}"
+                      role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{menu.label}}
+                    </a>
+                    <ul class="dropdown-menu" *ngIf="menu.subMenu && menu.subMenu.length > 0"
+                      [attr.aria-label]="menu.code">
+                      <li *ngFor="let item of menu.subMenu"><a class="nav-link" aria-current="page"
+                          href="#">{{item.label}}</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

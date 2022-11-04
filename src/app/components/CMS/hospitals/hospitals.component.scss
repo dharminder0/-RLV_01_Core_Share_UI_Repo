@@ -1,0 +1,88 @@
+.banner-area {
+    height: 250px;
+    padding: 50px 0;
+    background: url(../../../../assets/images/hospital-banner.jpg);
+    background-size: cover;
+    color: #fff;
+}
+
+.card-view {
+    padding: 50px 0;
+
+    .card-row {
+        .card {
+            width: 250px !important;
+            height: 300px;
+
+            .card-img-top {
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+                height: 200px;
+
+                .card-img {
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    -webkit-transition: -webkit-transform .6s cubic-bezier(.19, 1, .22, 1);
+                    transition: transform .6s cubic-bezier(.19, 1, .22, 1);
+                }
+
+                &:hover .card-img {
+                    -webkit-transform: scale3d(1.25, 1.25, 1.25);
+                    transform: scale3d(1.25, 1.25, 1.25);
+                    cursor: pointer
+                }
+            }
+
+            .card-body {
+                height: 100px;
+                background-color: #f8f8f8;
+            }
+        }
+
+        .card-info {
+            height: 0px;
+            opacity: 0;
+            transition: height 0.5s ease, opacity 1s ease;
+
+            .card-img {
+                height: 350px;
+              }
+        
+
+            .customRow {
+                border: 1px solid #f8f8f8;
+                margin-left: -25px;
+                margin-right: -5px;
+                background-color: #f8f8f8;
+            }
+
+            &.open {
+                height: 410px;
+                opacity: 1;
+            }
+
+            .window-close {
+                background: url(../../../../assets/images/cbp-sprite.png) no-repeat scroll -92px 0 transparent;
+                height: 40px;
+                width: 40px;
+                right: 10px;
+                top: 10px;
+                padding: 0;
+                border: medium none;
+                position: absolute;
+                cursor: pointer;
+                outline: 0;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}

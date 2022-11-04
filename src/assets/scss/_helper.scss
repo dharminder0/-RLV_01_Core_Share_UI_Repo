@@ -1,0 +1,180 @@
+// font size
+.fs-10 {
+    font-size: 10px;
+}
+.fs-11 {
+    font-size: 11px;
+}
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+// font weight
+.fw-regular {
+    font-weight: 400;
+}
+
+.fw-bold {
+    font-weight: 500;
+}
+
+.fw-bolder {
+    font-weight: 600;
+}
+
+
+/* border-radius */
+
+.bradius-5 {
+    border-radius: 5px;
+}
+
+.bradius-10 {
+    border-radius: 10px;
+}
+
+.bradius-20 {
+    border-radius: 20px;
+}
+
+.bradius-30 {
+    border-radius: 30px;
+}
+
+.bradius-50 {
+    border-radius: 50px;
+}
+
+//line height
+.lheight-16 {
+    line-height: 16px;
+}
+
+.lheight-14 {
+    line-height: 14px;
+}
+
+.lheight-17 {
+    line-height: 17px;
+}
+
+.lheight-18 {
+    line-height: 18px;
+}
+
+// cursor
+.pointer {
+    cursor: pointer;
+}
+
+.cursor-help {
+    cursor: help;
+}
+
+// full width
+.full-wide {
+    width: 100%;
+}
+
+// full height
+.full-height {
+    height: 100%;
+}
+
+// divider
+.divider {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+// word break
+.word-brk {
+    word-break: break-all;
+}
+
+// float
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+//html text limit
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//first letter capital
+.first-capitalized:first-letter {
+    text-transform: uppercase;
+}
+
+//overflow visible
+.overflow-visible {
+    overflow: visible;
+}
+
+.card-loader {
+    .spinner {
+        background: #fff;
+        opacity: 1;
+    }
+}
+
+.required {
+    &:after {
+        content: " *";
+        color: red;
+        font-size: 30px;
+        position: absolute;
+        top: 7px;
+    }
+    &.top-15 {
+        &:after {
+            top: 15px;
+        }
+    }
+}
+
+.xy-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.tabs-view {
+    border-bottom: 4px solid transparent;
+    padding-bottom: 5px;
+    &:hover {
+        border-bottom: 4px solid var(--primary-color);
+    }
+    &.selected {
+        border-bottom: 4px solid var(--primary-color);
+        font-weight: 600;
+    }
+}
+.text-right{
+    text-align: right;
+}

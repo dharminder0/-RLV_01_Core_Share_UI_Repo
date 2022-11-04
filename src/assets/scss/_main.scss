@@ -1,0 +1,22 @@
+input::placeholder {
+  color: #CEC1C3;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.multi-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*No of lines after which the ellipsis needs to be added*/
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  &.line-5{
+    -webkit-line-clamp: 5;
+  }
+  &.line-7{
+    -webkit-line-clamp: 7;
+  }
+}

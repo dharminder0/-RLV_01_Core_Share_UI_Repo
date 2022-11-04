@@ -1,0 +1,31 @@
+:root {
+    --primary-color: #df3631;
+    --secondary-color: #0f8587;
+    --primary-color-for-text: #494949;
+    --secondary-color-for-text:#A9A9A9;
+}
+
+body{
+    color: var(--primary-color-for-text);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: normal;
+}
+
+.primary-color{
+    color: var(--primary-color);
+}
+
+.primary-bg{
+    background-color: var(--primary-color) !important;
+}
+
+.secondary-color{
+    color: var(--secondary-color);
+}
+
+
+@import "assets/scss/btns.scss";
+@import "assets/scss/space";
+@import "assets/scss/helper";
+@import "assets/scss/main";

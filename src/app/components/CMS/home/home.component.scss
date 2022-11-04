@@ -5,3 +5,41 @@
     background-size: cover;
     color: #fff;
   }
+
+  .card {
+    height: 300px;
+
+    .card-img-top {
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      height: 200px;
+
+      .card-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        -webkit-transition: -webkit-transform .6s cubic-bezier(.19, 1, .22, 1);
+        transition: transform .6s cubic-bezier(.19, 1, .22, 1);
+      }
+
+      &:hover .card-img {
+        -webkit-transform: scale3d(1.25, 1.25, 1.25);
+        transform: scale3d(1.25, 1.25, 1.25);
+        cursor: pointer
+      }
+    }
+
+    .card-body {
+      height: 100px;
+    }
+  }
+
+  .d-section{
+    background-color: #f8f8f8;
+    margin: 20px 0;
+    padding: 50px 0;
+    .owl-carousel .owl-item{
+      margin: 10px;
+    }
+  }

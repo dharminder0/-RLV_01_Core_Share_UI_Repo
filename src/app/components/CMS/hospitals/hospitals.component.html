@@ -1,70 +1,72 @@
-<div class="banner-area">
-    <div class="container">
-      <div class="row ">
-        <div class="col-md-6 text-left">
-          <div class="banner-text">
-            <h1 class="ellipsis">Best Hospital In India</h1>
-            <h6 class="multi-ellipsis line-5">We guide you the best care in most reputed hospitals in the country and the excellent team of doctors at your service.</h6>
-          </div>
+<section class="banner-area">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-6 text-left">
+        <div class="banner-text">
+          <h1 class="ellipsis">Best Hospital In India</h1>
+          <h6 class="multi-ellipsis line-5">We guide you the best care in most reputed hospitals in the country and the
+            excellent team of doctors at your service.</h6>
         </div>
-        <div class="col-md-6 text-left">
-        </div>
+      </div>
+      <div class="col-md-6 text-left">
       </div>
     </div>
   </div>
-  
-  <div class="card-view">
-    <div class="container p-0">
-      <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">
-          <div class="card fs-12 fw-normal m-all-5 d-inline-block pointer border-0" *ngFor="let item of doctorsList | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)" (click)="selectCard(item,index)">
-              <ng-container [ngTemplateOutlet]="cardObj" [ngTemplateOutletContext]="{dataObj:item }"></ng-container>
-          </div>
-          <div class="card-info" [ngClass]="{'open': selectedCard.rowIndex === index}">
-              <div class="p-all-30 overflow-hidden mbottom-20 bg-white" *ngIf="selectedCard.rowIndex === index">
-                  <ng-container [ngTemplateOutlet]="cardDetails"></ng-container>
-              </div>
-          </div>
+</section>
+
+<section class="card-view">
+  <div class="container p-0">
+    <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">
+      <div class="card fs-12 fw-normal m-all-5 d-inline-block pointer border-0"
+        *ngFor="let item of doctorsList | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)"
+        (click)="selectCard(item,index)">
+        <ng-container [ngTemplateOutlet]="cardObj" [ngTemplateOutletContext]="{dataObj:item }"></ng-container>
       </div>
-  
-      <!-- Card View -->
-      <ng-template #cardObj let-item='dataObj'>
-          <div class="card-img-top rounded-0">
-              <div class="card-img rounded-0" [style.background-image]="'url(' + item.img + ')'"></div>
-            </div>
-            <div class="card-body text-center" [ngClass]="{'primary-bg text-white': selectedCard.id === item.id}">
-              <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
-              <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
-              <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-              <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-              <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-              <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-              <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-            </div>
-      </ng-template>
-  
-      <!-- Selected Card Details View -->
-      <ng-template #cardDetails>
-          <div class="row customRow">
-              <div class="col-sm-5 p-0">
-                  <img class="card-img" [src]="selectedCard.img" alt="card-image">
-              </div>
-              <div class="col-sm-7 position-relative pleft-20 ptop-10">
-                  <div class="window-close" (click)="selectedCard = {}"></div>
-                  <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="selectedCard.name">{{selectedCard.name}}</div>
-                  <div class="mbottom-5 ellipsis" [title]="selectedCard.speciality">{{selectedCard.speciality}}</div>
-                  <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                  <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                  <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                  <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                  <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                  <div class="mtop-30 ellipsis--5" [title]="selectedCard.about">{{selectedCard.about}}</div>
-                  <button class="btn btn-primary mtop-30">More details</button>
-                  <!-- <button class="btn btn-primary mtop-30 mleft-20">Book appointment</button> -->
-              </div>
-          </div>
-  
-      </ng-template>
-  
+      <div class="card-info" [ngClass]="{'open': selectedCard.rowIndex === index}">
+        <div class="p-all-30 overflow-hidden mbottom-20 bg-white" *ngIf="selectedCard.rowIndex === index">
+          <ng-container [ngTemplateOutlet]="cardDetails"></ng-container>
+        </div>
+      </div>
     </div>
+
+    <!-- Card View -->
+    <ng-template #cardObj let-item='dataObj'>
+      <div class="card-img-top rounded-0">
+        <div class="card-img rounded-0" [style.background-image]="'url(' + item.img + ')'"></div>
+      </div>
+      <div class="card-body text-center" [ngClass]="{'primary-bg text-white': selectedCard.id === item.id}">
+        <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
+        <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
+        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+      </div>
+    </ng-template>
+
+    <!-- Selected Card Details View -->
+    <ng-template #cardDetails>
+      <div class="row customRow">
+        <div class="col-sm-5 p-0">
+          <img class="card-img" [src]="selectedCard.img" alt="card-image">
+        </div>
+        <div class="col-sm-7 position-relative pleft-20 ptop-10">
+          <div class="window-close" (click)="selectedCard = {}"></div>
+          <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="selectedCard.name">{{selectedCard.name}}</div>
+          <div class="mbottom-5 ellipsis" [title]="selectedCard.speciality">{{selectedCard.speciality}}</div>
+          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+          <div class="mtop-30 ellipsis--5" [title]="selectedCard.about">{{selectedCard.about}}</div>
+          <button class="btn btn-primary mtop-30">More details</button>
+          <!-- <button class="btn btn-primary mtop-30 mleft-20">Book appointment</button> -->
+        </div>
+      </div>
+
+    </ng-template>
+
   </div>
-  
+</section>

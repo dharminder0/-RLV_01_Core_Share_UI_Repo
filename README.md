@@ -33,5 +33,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
   -- npm install @fortawesome/free-solid-svg-icons
   -- npm install --save @fortawesome/free-brands-svg-icons
   -- npm install jquery --save
+  -- npm i --save-dev @types/jquery
   -- npm install ngx-owl-carousel-o
   -- npm install animate.css

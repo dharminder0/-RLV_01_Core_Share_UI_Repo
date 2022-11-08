@@ -10,6 +10,9 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorsComponent } from './doctors/doctors.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CmsService } from './sharedServices/cms.service';
+import { HttpInterceptProviders } from '../../../assets/interceptor';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { DoctorsComponent } from './doctors/doctors.component';
     FontAwesomeModule,
     CarouselModule,
     CMSRoutingModule,
-    FormsModule
-  ]
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [CmsService, HttpInterceptProviders]
+
 })
 export class CMSModule { }

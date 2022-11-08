@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { CMSModule } from './components/CMS/cms.module';
 import { PatientModule } from './components/Patient/patient.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { Config } from '../config';
+import { HttpInterceptProviders } from '../assets/interceptor';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PatientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [Config, HttpInterceptProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

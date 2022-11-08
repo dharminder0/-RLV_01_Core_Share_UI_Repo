@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { SharedConfigService } from '../../shared/shared-config.service';
+import { SharedConfigService } from '../sharedServices/shared-config.service';
 
 @Component({
   selector: 'app-home',

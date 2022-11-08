@@ -1,0 +1,13 @@
+.header{
+    position: relative;
+    transition: position 04s;
+    &.sticky-header{
+        position: fixed;
+        transition: position 0.4s;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        background: #fff;
+        box-shadow: 0 2px 15px 0 rgb(0 0 0 / 20%);
+    }
+}

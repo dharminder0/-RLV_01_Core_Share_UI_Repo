@@ -1,0 +1,72 @@
+header {
+  .first-row {
+    height: 70px;
+    background: #F6F9F9;
+
+    .brand-logo {
+      height: 50px;
+    }
+  }
+
+  .second-row {
+    .search-area {
+      border: 1px solid #BDBDBD;
+      border-radius: 50px;
+      position: relative;
+      width: 100%;
+      height: 40px;
+
+      input {
+        border: 0;
+        width: 100%;
+        background: transparent;
+        padding: 10px 40px 10px 15px;
+
+        &:focus,
+        &:focus-visible {
+          outline: none;
+        }
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 12px;
+        top: 8px;
+        font-size: 18px;
+        color: #CEC1C3;
+      }
+    }
+    .navbar{
+        .container-fluid{
+            .navbar-collapse{
+                display: block !important;
+                .navbar-nav{
+                    .nav-item{
+                        padding: 5px 10px;
+                        margin: 0 10px;
+                        .nav-link{
+                            border-bottom: 3px solid transparent;
+                            padding: 0;
+                            &.active{
+                                color: var(--primary-color);
+                                border-bottom: 3px solid var(--primary-color);
+                            }
+                            &:hover,&:focus{
+                                color: var(--primary-color);
+                                border-bottom: 3px solid var(--primary-color);
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  }
+}
+
+svg{
+  path{
+    fill: var(--secondary-color);
+  }
+}

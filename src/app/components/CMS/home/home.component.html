@@ -1,0 +1,73 @@
+<section class="banner-area"></section>
+
+<!-- <section class="steps-list d-section"></section> -->
+
+<section class="doctors-list d-section">
+    <div class="row m-0">
+        <div class="col-sm-4">
+            <h2>Book Our Doctor</h2>
+            <p>Lorem Ipsum is simply dummy text </p>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum.</p>
+
+                <button class="btn btn-primary mtop-20">Book appointment</button>
+        </div>
+        <div class="col-sm-8">
+            <owl-carousel-o [options]="owlOptions">
+                <ng-container *ngFor="let item of doctorsList">
+                    <ng-template carouselSlide [id]="item.id">
+                        <div class="card">
+                            <div class="card-img-top">
+                                <div class="card-img" [style.background-image]="'url(' + item.img + ')'">
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+<section class="hospitals-list d-section">
+    <div class="row m-0">
+        <div class="col-sm-8 p-0">
+            <owl-carousel-o [options]="owlOptions">
+                <ng-container *ngFor="let item of hospitalList">
+                    <ng-template carouselSlide [id]="item.id">
+                        <div class="card">
+                            <div class="card-img-top">
+                                <div class="card-img" [style.background-image]="'url(' + item.img + ')'">
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+        <div class="col-sm-4 pleft-40">
+            <h2>Our Hospitals</h2>
+            <p>Lorem Ipsum is simply dummy text </p>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum.</p>
+        </div>
+    </div>
+</section>

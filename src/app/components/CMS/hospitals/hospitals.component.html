@@ -37,11 +37,11 @@
       <div class="card-body text-center" [ngClass]="{'primary-bg text-white': selectedCard.id === item.id}">
         <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
         <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
-        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-        <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
       </div>
     </ng-template>
 

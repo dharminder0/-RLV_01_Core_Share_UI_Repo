@@ -4,10 +4,12 @@
   background: url(../../../../assets/images/doctors-banner.jpg);
   background-size: cover;
   color: #fff;
+  position: relative;
 }
 
 .card {
   height: 300px;
+  width: 250px;
 
   .card-img-top {
     overflow: hidden;

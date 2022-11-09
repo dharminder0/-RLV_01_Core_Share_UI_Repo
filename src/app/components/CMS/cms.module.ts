@@ -13,6 +13,8 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CmsService } from './sharedServices/cms.service';
 import { HttpInterceptProviders } from '../../../assets/interceptor';
+import { DoctorDetailsComponent } from './doctors/doctor-details/doctor-details.component';
+import { CommonFiltersComponent } from './sharedComponent/common-filters/common-filters.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { HttpInterceptProviders } from '../../../assets/interceptor';
     MainHeaderComponent,
     MainFooterComponent,
     HospitalsComponent,
-    DoctorsComponent
+    DoctorsComponent,
+    DoctorDetailsComponent,
+    CommonFiltersComponent
   ],
   imports: [
     CommonModule,

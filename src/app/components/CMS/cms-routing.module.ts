@@ -9,11 +9,7 @@ const routes: Routes =  [
   {
       path: '', component: ContainerComponent, 
       children: [
-        {
-          path: '',
-          redirectTo: 'home',
-          pathMatch: 'full'
-        },
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
         { path: 'doctors', component: DoctorsComponent },
         { path: 'hospitals', component: HospitalsComponent },

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,13 @@ export class SharedConfigService {
     nav: true
   }
 
+  public generalSubscriptionData: any = {};
+  public generalObservable = new BehaviorSubject(this.generalSubscriptionData);
+
   constructor() { }
+
+  //general subscription/observable
+  detectGeneralSubscription() {
+    this.generalObservable.next(this.generalSubscriptionData);
+  }
 }

@@ -1,0 +1,25 @@
+<div class="common-filter">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-5">
+                    <select class="form-select h-100" [(ngModel)]="selectedCountry" (ngModelChange)="getCityList()">
+                        <option selected disabled>Select Country</option>
+                        <option [value]="item.id" *ngFor="let item of countryList" [title]="item.countryName">{{item.countryName}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-5">
+                    <select class="form-select h-100" [(ngModel)]="selectedCity" (ngModelChange)="setGeneralSubscription()">
+                        <option selected [value]="0">All</option>
+                        <option [value]="item.id" *ngFor="let item of cityList" [title]="item.cityName">{{item.cityName}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" [disabled]="!selectedCountry">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-<section class="banner-area"></section>
+<section class="banner-area">
+    <app-common-filters></app-common-filters>
+</section>
 
 <!-- <section class="steps-list d-section"></section> -->
 
@@ -18,17 +20,12 @@
                     <ng-template carouselSlide [id]="item.id">
                         <div class="card">
                             <div class="card-img-top">
-                                <div class="card-img" [style.background-image]="'url(' + item.img + ')'">
-                                </div>
+                                <div class="card-img" [style.background-image]="'url(' + item.img + ')'"></div>
                             </div>
                             <div class="card-body text-center">
-                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
-                                <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.displayName">{{item.displayName}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.qualification">{{item.qualification}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.designation">{{item.designation}}</div>
                             </div>
                         </div>
                     </ng-template>
@@ -50,13 +47,9 @@
                                 </div>
                             </div>
                             <div class="card-body text-center">
-                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
-                                <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-                                <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
+                                <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.title">{{item.title}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.address">{{item.address}}</div>
+                                <div class="mbottom-5 ellipsis" [title]="item.bedCount">{{item.bedCount}}</div>
                             </div>
                         </div>
                     </ng-template>

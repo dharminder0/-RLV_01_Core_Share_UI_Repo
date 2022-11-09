@@ -15,6 +15,7 @@ import { CmsService } from './sharedServices/cms.service';
 import { HttpInterceptProviders } from '../../../assets/interceptor';
 import { DoctorDetailsComponent } from './doctors/doctor-details/doctor-details.component';
 import { CommonFiltersComponent } from './sharedComponent/common-filters/common-filters.component';
+import { HospitalDetailsComponent } from './hospitals/hospital-details/hospital-details.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CommonFiltersComponent } from './sharedComponent/common-filters/common-
     HospitalsComponent,
     DoctorsComponent,
     DoctorDetailsComponent,
-    CommonFiltersComponent
+    CommonFiltersComponent,
+    HospitalDetailsComponent
   ],
   imports: [
     CommonModule,

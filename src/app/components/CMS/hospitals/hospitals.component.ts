@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CmsService } from '../sharedServices/cms.service';
 import { SharedConfigService } from '../sharedServices/shared-config.service';
@@ -14,6 +14,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   private generalSubscription:any = Subscription;
   // Objects
   public selectedCard: any = {};
+  public selectedFilter: any = {};
 
   // Array
   public reportData: any = [];
@@ -21,26 +22,19 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   // Numeric
   public cardPerRow: number = 5;
   public totalRecords: number = 0;
-  public selectedCountry: number = 1;
-  public selectedCity: number = 0;
 
 
   constructor(
     private cmsService: CmsService,
+    private router: Router,
     private sharedConfigService: SharedConfigService,
-  ) {
-    this.totalRecords = Math.ceil(this.reportData.length / this.cardPerRow);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.getReportData();
     this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
       if (item && item.changeFor && item.changeFor === "commonFilter") {
-        if(item.data && item.data.selectedCountry){
-          this.selectedCountry = item.data.selectedCountry;
-        }
-        if(item.data && item.data.selectedCity){
-          this.selectedCity = parseInt(item.data.selectedCity);
+        if(item.data && Object.keys(item.data).length > 0){
+          this.selectedFilter = JSON.parse(JSON.stringify(item.data));
         }
         this.getReportData();
         this.sharedConfigService.generalSubscriptionData = {};
@@ -57,13 +51,14 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   getReportData() {
     let reqPayload:any = {
       "searchText": "",
-      "countryId": this.selectedCountry,
-      "cityList": this.selectedCity > 0?[this.selectedCity]:[],
+      "countryId": this.selectedFilter.country,
+      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
     };
     this.cmsService.getHospitalsList(reqPayload).subscribe((result: any) => {
       this.reportData = [];
+      this.selectedCard = {};
       this.totalRecords = 0;
       if (result && result.length > 0) {
         result.map((item:any) => {
@@ -83,6 +78,11 @@ export class HospitalsComponent implements OnInit, OnDestroy {
     else {
       this.selectedCard = {};
     }
+  }
+
+  gotToDetailPage(data: any) {
+    return false;
+    this.router.navigate([`/cms/hospitals/${data.id}`]);
   }
 
 }

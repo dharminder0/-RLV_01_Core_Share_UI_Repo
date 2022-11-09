@@ -30,4 +30,9 @@ export class CmsService {
     return this.http.post(url, payload);
   }
 
+  getIpDetails(){
+    let url: string = `http://ip-api.com/json`;
+    return this.http.get(url);
+  }
+
 }

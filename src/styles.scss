@@ -27,6 +27,14 @@ body{
 }
 
 
+@media screen and (min-width: 1200px) {
+
+    .container {
+        max-width: 1200px !important;
+    }
+}
+
+
 @import "assets/scss/btns.scss";
 @import "assets/scss/space";
 @import "assets/scss/helper";

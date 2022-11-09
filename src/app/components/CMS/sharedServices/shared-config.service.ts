@@ -23,6 +23,9 @@ export class SharedConfigService {
       480: {
         items: 2
       },
+      390: {
+        items: 1
+      },
       767: {
         items: 3
       },

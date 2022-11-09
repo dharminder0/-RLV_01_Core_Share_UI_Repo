@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CmsService } from '../sharedServices/cms.service';
 import { SharedConfigService } from '../sharedServices/shared-config.service';
@@ -9,32 +10,38 @@ import { SharedConfigService } from '../sharedServices/shared-config.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private generalSubscription:any = Subscription;
+  private generalSubscription: any = Subscription;
 
   owlOptions;
 
-  public selectedCountry: number = 1;
-  public selectedCity: number = 0;
+  public selectedFilter: any = {};
 
   public doctorsList: any = [];
   public hospitalList: any = [];
 
+  public slidesLength: number = 3;
+
+
   constructor(
     private cmsService: CmsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private sharedConfigService: SharedConfigService
-  ) { 
+  ) {
     this.owlOptions = this.sharedConfigService.owlOptions;
-
+    // if (window.innerWidth <= 1400) {
+    //   this.slidesLength = 2;
+    // }
+    if (window.innerWidth <= 600) {
+      this.slidesLength = 1;
+    }
   }
 
   ngOnInit(): void {
     this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
       if (item && item.changeFor && item.changeFor === "commonFilter") {
-        if(item.data && item.data.selectedCountry){
-          this.selectedCountry = item.data.selectedCountry;
-        }
-        if(item.data && item.data.selectedCity){
-          this.selectedCity = parseInt(item.data.selectedCity);
+        if(item.data && Object.keys(item.data).length > 0){
+          this.selectedFilter = JSON.parse(JSON.stringify(item.data));
         }
         this.getHospitalsList();
         this.getDoctorsList();
@@ -44,22 +51,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.generalSubscription.unsubscribe();
   }
 
   getHospitalsList() {
-    let reqPayload:any = {
+    let reqPayload: any = {
       "searchText": "",
-      "countryId": this.selectedCountry,
-      "cityList": this.selectedCity > 0?[this.selectedCity]:[],
+      "countryId": this.selectedFilter.country,
+      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
     };
     this.cmsService.getHospitalsList(reqPayload).subscribe((result: any) => {
       this.hospitalList = [];
       if (result && result.length > 0) {
-        result.map((item:any) => {
+        result.map((item: any) => {
           item.img = "https://rlvcontents.blob.core.windows.net/hospital/Apollo.jpg";
         });
         this.hospitalList = [...result];
@@ -68,17 +75,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getDoctorsList() {
-    let reqPayload:any = {
+    let reqPayload: any = {
       "searchText": "",
-      "countryId": this.selectedCountry,
-      "cityList": this.selectedCity > 0?[this.selectedCity]:[],
+      "countryId": this.selectedFilter.country,
+      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
     };
     this.cmsService.getDoctorsList(reqPayload).subscribe((result: any) => {
       this.doctorsList = [];
       if (result && result.length > 0) {
-        result.map((item:any) => {
+        result.map((item: any) => {
           item.img = "https://rlvcontents.blob.core.windows.net/doctor/Dr.%20Abhinav%20Aggarwal.JPG";
         });
         this.doctorsList = [...result];
@@ -86,8 +93,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToDetailsPage(type:string, id:number){
-
+  gotToDetailPage(type: string, data: any) {
+    return false;
+    this.router.navigate([`/cms/${type}/${data.id}`]);
   }
 
 }

@@ -36,3 +36,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
   -- npm i --save-dev @types/jquery
   -- npm install ngx-owl-carousel-o
   -- npm install animate.css
+  -- npm install ngx-device-detector --save

@@ -9,10 +9,30 @@ export class CmsService {
   constructor(private http: HttpClient) { }
 
 
-  getDoctorsList(){
-    let url: string = `Doctor/GetDoctors`;
-    return this.http.get(url);
 
+  getCountryList(){
+    let url: string = `Country/list`;
+    return this.http.get(url);
+  }
+
+  getCityList(countryId :Number){
+    let url: string = `City/${countryId }/list`;
+    return this.http.get(url);
+  }
+
+  getDoctorsList(payload:any){
+    let url: string = `Doctor/list`;
+    return this.http.post(url, payload);
+  }
+
+  getHospitalsList(payload:any){
+    let url: string = `Hospital/list`;
+    return this.http.post(url, payload);
+  }
+
+  getIpDetails(){
+    let url: string = `http://ip-api.com/json`;
+    return this.http.get(url);
   }
 
 }

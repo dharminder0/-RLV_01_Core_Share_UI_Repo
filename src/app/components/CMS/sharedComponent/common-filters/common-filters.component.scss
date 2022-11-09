@@ -1,0 +1,13 @@
+.common-filter{
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background-color: #e7fcff;
+    padding: 10px;  
+    .form-select{
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}

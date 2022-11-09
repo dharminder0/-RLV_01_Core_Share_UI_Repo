@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { faLocationPin, faNotesMedical, faStar } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CmsService } from '../sharedServices/cms.service';
+import { SharedConfigService } from '../sharedServices/shared-config.service';
 
 
 @Component({
@@ -8,162 +10,80 @@ import { CmsService } from '../sharedServices/cms.service';
   templateUrl: './doctors.component.html',
   styleUrls: ['./doctors.component.scss']
 })
-export class DoctorsComponent implements OnInit {
+export class DoctorsComponent implements OnInit, OnDestroy {
+  private generalSubscription:any = Subscription;
 
-  faLocationPin = faLocationPin;
-  faNotesMedical = faNotesMedical;
-  faStar = faStar;
+  // Objects
+  public selectedCard: any = {};
+  public selectedFilter: any = {};
 
+  // Array
+  public reportData: any = [];
+
+  // Numeric
   public cardPerRow: number = 5;
   public totalRecords: number = 0;
 
-  public selectedCard: any = {};
 
-  // public doctorsList: any = [
-  //   {
-  //     "id": 1,
-  //     "name": "Dr. Magdy Shawky Shady",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Psychology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/01/aa20580458_m-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 2,
-  //     "name": "Dr. Borimir J Darakchiev",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Cardiology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/02/concierge-doctor701-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 3,
-  //     "name": "Dr A G K Gokhale",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Diagnostic radiology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/01/default-doctor-category-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 4,
-  //     "name": "Dr. Keri Peterson MD",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Cardiology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/02/doctor-v-nurse-704-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 5,
-  //     "name": "Dr. Modesto Fontanez",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Cardiac Surgery",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/01/feature-doctor1-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 6,
-  //     "name": "Dr. Robert Carras",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Diagnostic radiology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/01/feature-doctor3-300x199.jpg",
-  //     "awards": [
-
-  //     ]
-  //   },
-  //   {
-  //     "id": 7,
-  //     "name": "Dr. Steven P. Leon",
-  //     "qualification": [
-  //       "MBBS",
-  //       "abc"
-  //     ],
-  //     "department": "Surgical Oncology & Robotic Surgery",
-  //     "speciality": "Diagnostic radiology",
-  //     "experience": "9 years",
-  //     "about": "Dr. Rohit Kumar C graduated MBBS from Vijayanagara Institute of Medical Sciences (VIMS, Ballari) in 2008.",
-  //     "img": "http://medical.eplug-ins.com/wp-content/uploads/2016/01/bb20305841_m-300x196.jpg",
-  //     "awards": [
-
-  //     ]
-  //   }
-  // ];
-
-  public doctorsList: any = [];
-
-
-  constructor(private cmsService:CmsService) {
-    this.totalRecords = Math.ceil(this.doctorsList.length / this.cardPerRow);
-   }
+  constructor(
+    private cmsService: CmsService,
+    private router: Router,
+    private sharedConfigService: SharedConfigService
+  ) {}
 
   ngOnInit(): void {
-    this.getDoctorsList();
-  }
-
-
-  getDoctorsList(){
-    this.cmsService.getDoctorsList().subscribe((result:any) => {
-      if(result && result.length > 0){
-        this.doctorsList = [...result];
-        this.totalRecords = Math.ceil(this.doctorsList.length / this.cardPerRow);
+    this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
+      if (item && item.changeFor && item.changeFor === "commonFilter") {
+        if(item.data && Object.keys(item.data).length > 0){
+          this.selectedFilter = JSON.parse(JSON.stringify(item.data));
+        }
+        this.getReportData();
+        this.sharedConfigService.generalSubscriptionData = {};
+        this.sharedConfigService.detectGeneralSubscription();
       }
-    })
-
+    });
   }
 
-  selectCard(dataObj:any, rowIndex:number){
-    if(dataObj.id !== this.selectedCard.id){
-      this.selectedCard = JSON.parse(JSON.stringify(dataObj)) ; 
+  ngOnDestroy(){
+    this.generalSubscription.unsubscribe();
+  }
+
+  getReportData() {
+    let reqPayload:any = {
+      "searchText": "",
+      "countryId": this.selectedFilter.country,
+      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
+      "hospitalList": [],
+      "languageId": 1
+    };
+
+    this.cmsService.getDoctorsList(reqPayload).subscribe((result: any) => {
+      this.reportData = [];
+      this.selectedCard = {};
+      this.totalRecords = 0;
+      if (result && result.length > 0) {
+        result.map((item:any) => {
+          item.img = "https://rlvcontents.blob.core.windows.net/doctor/Dr.%20Abhinav%20Aggarwal.JPG";
+        });
+        this.reportData = [...result];
+        this.totalRecords = Math.ceil(this.reportData.length / this.cardPerRow);
+      }
+    });
+  }
+
+  selectCard(dataObj: any, rowIndex: number) {
+    if (dataObj.id !== this.selectedCard.id) {
+      this.selectedCard = JSON.parse(JSON.stringify(dataObj));
       this.selectedCard.rowIndex = rowIndex;
     }
-    else{
+    else {
       this.selectedCard = {};
     }
+  }
+
+  gotToDetailPage(data: any) {
+    return false;
+    this.router.navigate([`/cms/doctors/${data.id}`]);
   }
 
 }

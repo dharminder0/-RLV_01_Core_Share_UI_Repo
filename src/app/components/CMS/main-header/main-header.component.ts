@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { faSearch, faPhone, faSquareEnvelope, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-main-header',
@@ -13,6 +14,8 @@ export class MainHeaderComponent implements OnInit {
   faPhone = faPhone;
   faSquareEnvelope = faSquareEnvelope;
   faCaretDown = faCaretDown
+
+  public isMobile: boolean = false;
 
   public headerDetails: any = {
     "logo": "https://bootstrapshuffle.com/static/img/shuffle-frameworks/shuffle-for-bootstrap-color.svg",
@@ -55,13 +58,34 @@ export class MainHeaderComponent implements OnInit {
 
   public selectedMenu: string = "home";
 
-  constructor(private router: Router) {
-    if(this.router.url){
-      this.selectedMenu = this.router.url?this.router.url.split('/')[2]:this.selectedMenu;
+  constructor(private router: Router,private activatedRoute: ActivatedRoute, private deviceService: DeviceDetectorService) {
+    this.isMobile = this.deviceService.isMobile();
+    if(this.headerMenu && this.headerMenu.length > 0){
+      this.headerMenu.map((item:any) => {
+        if(this.router.url && this.router.url.includes(item.code)){
+          this.selectedMenu = item.code;
+        }
+      });
     }
    }
 
   ngOnInit(): void {
+
+  }
+
+  pageNavigation(page:string){
+    let selectedFilters: any = {};
+    if(this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParamMap && Object.keys(this.activatedRoute.snapshot.queryParamMap).length > 0){
+      selectedFilters = this.activatedRoute.snapshot.queryParamMap;
+    }
+    let tempObject: any = { country: selectedFilters.get('country'), city: selectedFilters.get('city') };
+    const queryParams: Params = tempObject;
+    this.router.navigate([`/cms/${page}`],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
 
   }
 }

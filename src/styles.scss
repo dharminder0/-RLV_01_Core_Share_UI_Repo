@@ -10,6 +10,8 @@ body{
     font-size: 14px;
     font-weight: 500;
     white-space: normal;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .primary-color{
@@ -22,6 +24,14 @@ body{
 
 .secondary-color{
     color: var(--secondary-color);
+}
+
+
+@media screen and (min-width: 1200px) {
+
+    .container {
+        max-width: 1200px !important;
+    }
 }
 
 

@@ -4,7 +4,7 @@
       <div class="col-md-6 text-left">
         <div class="banner-text">
           <h1 class="ellipsis">Best Hospital In India</h1>
-          <h6 class="multi-ellipsis line-5">We guide you the best care in most reputed hospitals in the country and the
+          <h6 class="multi-ellipsis line-3">We guide you the best care in most reputed hospitals in the country and the
             excellent team of doctors at your service.</h6>
         </div>
       </div>
@@ -12,13 +12,14 @@
       </div>
     </div>
   </div>
+  <app-common-filters></app-common-filters>
 </section>
 
 <section class="card-view">
   <div class="container p-0">
     <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">
       <div class="card fs-12 fw-normal m-all-5 d-inline-block pointer border-0"
-        *ngFor="let item of doctorsList | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)"
+        *ngFor="let item of reportData | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)"
         (click)="selectCard(item,index)">
         <ng-container [ngTemplateOutlet]="cardObj" [ngTemplateOutletContext]="{dataObj:item }"></ng-container>
       </div>
@@ -35,13 +36,9 @@
         <div class="card-img rounded-0" [style.background-image]="'url(' + item.img + ')'"></div>
       </div>
       <div class="card-body text-center" [ngClass]="{'primary-bg text-white': selectedCard.id === item.id}">
-        <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.name">{{item.name}}</div>
-        <div class="mbottom-5 ellipsis" [title]="item.speciality">{{item.speciality}}</div>
-        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
-        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
-        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
-        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
-        <fa-icon [icon]="faStar" [ngClass]="{'primary-color': selectedCard.id !== item.id}"></fa-icon>
+        <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.title">{{item.title}}</div>
+        <div class="mbottom-5 ellipsis" [title]="item.address">{{item.address}}</div>
+        <div class="mbottom-5 ellipsis" [title]="item.bedCount">{{item.bedCount}}</div>
       </div>
     </ng-template>
 
@@ -51,22 +48,16 @@
         <div class="col-sm-5 p-0">
           <img class="card-img" [src]="selectedCard.img" alt="card-image">
         </div>
-        <div class="col-sm-7 position-relative pleft-20 ptop-10">
+        <div class="col-sm-7 position-relative p-all-10">
           <div class="window-close" (click)="selectedCard = {}"></div>
-          <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="selectedCard.name">{{selectedCard.name}}</div>
-          <div class="mbottom-5 ellipsis" [title]="selectedCard.speciality">{{selectedCard.speciality}}</div>
-          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-          <fa-icon class="primary-color" [icon]="faStar"></fa-icon>
-          <div class="mtop-30 ellipsis--5" [title]="selectedCard.about">{{selectedCard.about}}</div>
-          <button class="btn btn-primary mtop-30">More details</button>
-          <!-- <button class="btn btn-primary mtop-30 mleft-20">Book appointment</button> -->
+          <div class="mbottom-5 fs-16 fw-bolder multi-ellipsis" [title]="selectedCard.title">{{selectedCard.title}}</div>
+          <div class="mbottom-5 multi-ellipsis" [title]="selectedCard.address">{{selectedCard.address}}</div>
+          <div class="mbottom-5 multi-ellipsis" [title]="selectedCard.bedCount">{{selectedCard.bedCount}}</div>
+          <div class="mtop-30 multi-ellipsis line-7" [title]="selectedCard.details">{{selectedCard.details}}</div>
+          <button class="btn btn-primary mtop-30" (click)="gotToDetailPage(selectedCard)">More details</button>
         </div>
       </div>
-
     </ng-template>
-
+    <div *ngIf="!reportData || (reportData && reportData.length <= 0)" class="text-center">No data available</div>
   </div>
 </section>

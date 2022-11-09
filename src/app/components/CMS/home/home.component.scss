@@ -4,10 +4,12 @@
   background: url(../../../../assets/images/doctors-banner.jpg);
   background-size: cover;
   color: #fff;
+  position: relative;
 }
 
 .card {
   height: 300px;
+  width: 250px;
 
   .card-img-top {
     overflow: hidden;
@@ -39,6 +41,7 @@
   background-color: #f8f8f8;
   margin: 20px 0;
   padding: 50px;
+  min-height: 200px;
 
   .owl-carousel .owl-item {
     margin: 10px;

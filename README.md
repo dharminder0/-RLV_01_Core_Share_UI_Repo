@@ -37,3 +37,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
   -- npm install ngx-owl-carousel-o
   -- npm install animate.css
   -- npm install ngx-device-detector --save
+  -- ng add @angular/material
+  -- npm install --save @angular-slider/ngx-slider

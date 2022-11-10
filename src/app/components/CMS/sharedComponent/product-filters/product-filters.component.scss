@@ -1,0 +1,30 @@
+.product-filters{
+    border: 1px solid #EBEBEB;
+    margin-top: 5px;
+    border-radius: 6px;
+    .card{
+        .card-header{
+            background-color: #e7fcff;
+            &.link{
+                text-decoration: none;
+                &:focus, &:hover{
+                    color: var(--primary-color);
+                }
+                .icon{
+                    position: absolute;
+                    right: 15px;
+                }
+            }
+            .custom-wide{
+                width: calc(100% - 70px);
+            }
+        }
+        .card-body{
+            max-height: 310px;
+            overflow: auto;
+            .card-header{
+                background-color: #f8f8f8;
+            }
+        }
+    }
+}

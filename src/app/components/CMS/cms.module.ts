@@ -16,6 +16,9 @@ import { HttpInterceptProviders } from '../../../assets/interceptor';
 import { DoctorDetailsComponent } from './doctors/doctor-details/doctor-details.component';
 import { CommonFiltersComponent } from './sharedComponent/common-filters/common-filters.component';
 import { HospitalDetailsComponent } from './hospitals/hospital-details/hospital-details.component';
+import { ProductFiltersComponent } from './sharedComponent/product-filters/product-filters.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import { HospitalDetailsComponent } from './hospitals/hospital-details/hospital-
     DoctorsComponent,
     DoctorDetailsComponent,
     CommonFiltersComponent,
-    HospitalDetailsComponent
+    HospitalDetailsComponent,
+    ProductFiltersComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import { HospitalDetailsComponent } from './hospitals/hospital-details/hospital-
     CarouselModule,
     CMSRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCheckboxModule,
+    NgxSliderModule
   ],
   providers: [CmsService, HttpInterceptProviders]
 

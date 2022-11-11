@@ -20,7 +20,12 @@ import { ProductFiltersComponent } from './sharedComponent/product-filters/produ
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { ApplicationPipes } from '../shared/pipes/CustomPipes';
+import { SelectedFiltersViewComponent } from './sharedComponent/selected-filters-view/selected-filters-view.component';
 
 
 @NgModule({
@@ -34,7 +39,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     DoctorDetailsComponent,
     CommonFiltersComponent,
     HospitalDetailsComponent,
-    ProductFiltersComponent
+    ProductFiltersComponent,
+    SelectedFiltersViewComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +53,14 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxSliderModule
+    MatChipsModule,
+    MatButtonModule,
+    MatIconModule,
+    NgxSliderModule,
+    ApplicationPipes,
+  ],
+  exports: [
+    ApplicationPipes
   ],
   providers: [CmsService, HttpInterceptProviders]
 

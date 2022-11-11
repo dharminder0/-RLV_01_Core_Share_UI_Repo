@@ -51,7 +51,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   getReportData() {
     let reqPayload:any = {
       "searchText": "",
-      "countryId": this.selectedFilter.country,
+      "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
@@ -61,9 +61,6 @@ export class HospitalsComponent implements OnInit, OnDestroy {
       this.selectedCard = {};
       this.totalRecords = 0;
       if (result && result.length > 0) {
-        result.map((item:any) => {
-          item.img = "https://rlvcontents.blob.core.windows.net/hospital/Apollo.jpg";
-        });
         this.reportData = [...result];
         this.totalRecords = Math.ceil(this.reportData.length / this.cardPerRow);
       }

@@ -1,0 +1,10 @@
+<div class="ptop-20" *ngIf="selectedFilterList && selectedFilterList.length > 0">
+    <mat-chip-list aria-label="Filter selection">
+        <mat-chip *ngFor="let item of selectedFilterList" (removed)="removeSelectedFilter(item.code)">
+            <span>{{item.title}}:</span>
+            <span class="mleft-10 fw-normal" *ngIf="item.type == 'string'">{{item.value}}</span>
+            <span class="mleft-10 fw-normal" *ngIf="item.type == 'numeric'">{{item.minValue}} - {{item.maxValue}}</span>
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+    </mat-chip-list>
+</div>

@@ -6,6 +6,10 @@
         </a>
         <div [id]="item.code" class="collapse" data-bs-parent="#accordion" [ngClass]="{'show': i == 0}">
             <div class="card-body p-0" *ngIf="item.code !== 'hospitalAge' && item.code !== 'BedsRange'">
+                <!-- <mat-form-field class="w-100" appearance="outline" [color]="colorControl">
+                    <mat-label>Search {{item.title}}</mat-label>
+                    <input type="text" matInput [(ngModel)]="item.search">
+                </mat-form-field> -->
                 <div class="card border-0" *ngFor="let subItem of filterData[item.code]">
                     <div class="card-header link pointer rounded-0 ellipsis p-all-15" [title]="subItem.title"> 
                         <mat-checkbox (change)="updateFilter(item.code, subItem.id)"><div>{{subItem.title}}</div></mat-checkbox>

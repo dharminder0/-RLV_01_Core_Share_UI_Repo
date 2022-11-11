@@ -18,6 +18,8 @@ import { CommonFiltersComponent } from './sharedComponent/common-filters/common-
 import { HospitalDetailsComponent } from './hospitals/hospital-details/hospital-details.component';
 import { ProductFiltersComponent } from './sharedComponent/product-filters/product-filters.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -42,6 +44,9 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     FormsModule,
     HttpClientModule,
     MatCheckboxModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
     NgxSliderModule
   ],
   providers: [CmsService, HttpInterceptProviders]

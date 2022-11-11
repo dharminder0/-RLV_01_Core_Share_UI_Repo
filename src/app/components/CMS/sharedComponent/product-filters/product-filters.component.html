@@ -5,20 +5,21 @@
             <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
         </a>
         <div [id]="item.code" class="collapse" data-bs-parent="#accordion" [ngClass]="{'show': i == 0}">
-            <div class="card-body p-0" *ngIf="item.code !== 'hospitalAge' && item.code !== 'BedsRange'">
-                <!-- <mat-form-field class="w-100" appearance="outline" [color]="colorControl">
-                    <mat-label>Search {{item.title}}</mat-label>
-                    <input type="text" matInput [(ngModel)]="item.search">
-                </mat-form-field> -->
-                <div class="card border-0" *ngFor="let subItem of filterData[item.code]">
+            <div class="card-body p-0" *ngIf="item.code !== 'hospitalAge' && item.code !== 'BedsRange' && item.code !== 'experience'">
+                <div class="search-area position-relative card-header p-all-10">
+                    <input class="form-control pright-35" type="text" [(ngModel)]="item.search" placeholder="Search by {{item.title}}">
+                    <fa-icon class="search-icon pointer" *ngIf="!item.search" [icon]="faSearch"></fa-icon>
+                    <fa-icon class="search-icon pointer" *ngIf="item.search" [icon]="faTimesCircle" (click)="item.search = ''"></fa-icon>
+                  </div>
+                <div class="card border-0" *ngFor="let subItem of filterData[item.code] | searchFilterPipe:'title':item.search">
                     <div class="card-header link pointer rounded-0 ellipsis p-all-15" [title]="subItem.title"> 
-                        <mat-checkbox (change)="updateFilter(item.code, subItem.id)"><div>{{subItem.title}}</div></mat-checkbox>
+                        <mat-checkbox  color="warn" (change)="updateFilter(item, subItem)" [(ngModel)]="subItem.isSelected"><div>{{subItem.title}}</div></mat-checkbox>
                     </div>
                 </div>
                 <div class="card-header text-center fw-normal" *ngIf="!filterData[item.code] || filterData[item.code] && filterData[item.code].length <=0">No data availble</div>
             </div>
-            <div class="card-body" *ngIf="item.code == 'hospitalAge' || item.code == 'BedsRange'">
-                <ngx-slider [(value)]="selectedFilters[item.code].minValue" [(highValue)]="selectedFilters[item.code].maxValue" [options]="sliderOptions"></ngx-slider>
+            <div class="card-body" *ngIf="item.code == 'hospitalAge' || item.code == 'BedsRange' ||  item.code == 'experience'">
+                <ngx-slider [(value)]="selectFiltersObj[item.code].minValue" [(highValue)]="selectFiltersObj[item.code].maxValue" [options]="sliderOptions" (mouseup)="getUpdatedFilteredList(item, selectFiltersObj)"></ngx-slider>
             </div>
         </div>
     </div>

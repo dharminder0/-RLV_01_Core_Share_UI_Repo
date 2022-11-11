@@ -4,7 +4,7 @@
             <div class="col-sm-5">
                 <select class="form-select h-100" [(ngModel)]="selectedFilters.country" (ngModelChange)="changeCounrty()">
                     <option selected disabled>Select Country</option>
-                    <option [value]="item.id" *ngFor="let item of countryList" [title]="item.countryName">{{item.countryName}}</option>
+                    <option [value]="item.code" *ngFor="let item of countryList" [title]="item.countryName">{{item.countryName}}</option>
                 </select>
             </div>
             <div class="col-sm-5">

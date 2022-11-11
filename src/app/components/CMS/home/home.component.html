@@ -32,9 +32,10 @@
         <ng-template #hCardObj let-item='dataObj'>
             <div class="card" (click)="gotToDetailPage('hospitals',item)">
                 <div class="card-img-top">
-                    <div class="card-img" [style.background-image]="'url(' + item.img + ')'"></div>
+                    <div class="card-img" *ngIf="!item.img" [style.background-image]="'url(assets/images/default-img.png)'"></div>
+                    <div class="card-img" *ngIf="item.img" [style.background-image]="'url(' + item.img + ')'"></div>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body border-top rounded-bottom text-center">
                     <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.title">{{item.title}}</div>
                     <div class="mbottom-5 ellipsis" [title]="item.address">{{item.address}}</div>
                     <div class="mbottom-5 ellipsis" [title]="item.bedCount">{{item.bedCount}}</div>
@@ -76,9 +77,10 @@
         <ng-template #cardObj let-item='dataObj'>
             <div class="card" (click)="gotToDetailPage('doctors',item)">
                 <div class="card-img-top">
-                    <div class="card-img" [style.background-image]="'url(' + item.img + ')'"></div>
+                    <div class="card-img" *ngIf="!item.img" [style.background-image]="'url(assets/images/default-img.png)'"></div>
+                    <div class="card-img" *ngIf="item.img" [style.background-image]="'url(' + item.img + ')'"></div>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body border-top rounded-bottom text-center">
                     <div class="mbottom-5 fs-16 fw-bolder ellipsis" [title]="item.displayName">{{item.displayName}}</div>
                     <div class="mbottom-5 ellipsis" [title]="item.qualification">{{item.qualification}}</div>
                     <div class="mbottom-5 ellipsis" [title]="item.designation">{{item.designation}}</div>

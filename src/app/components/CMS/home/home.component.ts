@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getHospitalList() {
     let reqPayload: any = {
       "searchText": "",
-      "countryId": this.selectedFilter.country,
+      "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
@@ -66,9 +66,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.hospitalList = [];
       if (result && result.length > 0) {
-        result.map((item: any) => {
-          item.img = "https://rlvcontents.blob.core.windows.net/hospital/Apollo.jpg";
-        });
         this.hospitalList = [...result];
       }
     });
@@ -77,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getDoctorsList() {
     let reqPayload: any = {
       "searchText": "",
-      "countryId": this.selectedFilter.country,
+      "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
       "languageId": 1
@@ -85,9 +82,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cmsService.getDoctorsList(reqPayload).subscribe((result: any) => {
       this.doctorsList = [];
       if (result && result.length > 0) {
-        result.map((item: any) => {
-          item.img = "https://rlvcontents.blob.core.windows.net/doctor/Dr.%20Abhinav%20Aggarwal.JPG";
-        });
         this.doctorsList = [...result];
       }
     });

@@ -15,8 +15,8 @@ export class CmsService {
     return this.http.get(url);
   }
 
-  getCityList(countryId :Number){
-    let url: string = `City/${countryId }/list`;
+  getCityList(countryCode :Number){
+    let url: string = `City/listbyCountryCode?countryCode=${countryCode}`;
     return this.http.get(url);
   }
 
@@ -25,8 +25,8 @@ export class CmsService {
     return this.http.get(url);
   }
 
-  getDepartmentList(){
-    let url: string = `Department/list`;
+  getSpecialityList(){
+    let url: string = `Speciality/list`;
     return this.http.get(url);
   }
 

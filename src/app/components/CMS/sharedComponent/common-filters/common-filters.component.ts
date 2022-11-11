@@ -10,8 +10,7 @@ import { SharedConfigService } from '../../sharedServices/shared-config.service'
 })
 export class CommonFiltersComponent implements OnInit {
 
-  public selectedCountry: number = 1;
-  public selectedCity: number = 0;
+  public selectedFilters: any = {};
 
   public countryList: any = [];
   public cityList: any = [];
@@ -25,8 +24,10 @@ export class CommonFiltersComponent implements OnInit {
     //this.getIpDetails();
     if(this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParamMap && Object.keys(this.activatedRoute.snapshot.queryParamMap).length > 0){
       let tempObj:any = this.activatedRoute.snapshot.queryParamMap;
-      this.selectedCountry = tempObj.get('country')?tempObj.get('country'):this.selectedCountry;
-      this.selectedCity =  tempObj.get('city')?parseInt(tempObj.get('city')):this.selectedCity;
+      this.selectedFilters.country = tempObj.get('country')?tempObj.get('country'):1;
+      this.selectedFilters.city =  tempObj.get('city')?parseInt(tempObj.get('city')):0;
+      this.selectedFilters.treatment =  tempObj.get('treatment')?parseInt(tempObj.get('treatment')):0;
+      this.selectedFilters.hospital =  tempObj.get('hospital')?parseInt(tempObj.get('hospital')):0;
     }
   }
 
@@ -39,14 +40,17 @@ export class CommonFiltersComponent implements OnInit {
       this.countryList = [];
       if (result && result.length > 0) {
         this.countryList = [...result];
-        this.getCityList();
+        this.getCityList(false);
       }
       this.setGeneralSubscription();
     });
   }
 
-  getCityList() {
-    this.cmsService.getCityList(this.selectedCountry).subscribe((result: any) => {
+  getCityList(isCountryChanged:boolean) {
+    if(isCountryChanged){
+      this.selectedFilters.city = 0;
+    }
+    this.cmsService.getCityList(this.selectedFilters.country).subscribe((result: any) => {
       this.cityList = [];
       if (result && result.length > 0) {
         this.cityList = [...result];
@@ -54,23 +58,31 @@ export class CommonFiltersComponent implements OnInit {
     });
   }
 
+  changeCounrty(){
+    this.getCityList(true);
+  }
+
   setFilterParams() {
-    let tempObject: any = { country: this.selectedCountry };
-    if (this.selectedCity > 0) {
-      tempObject['city'] = this.selectedCity;
+    if(this.selectedFilters && Object.keys(this.selectedFilters).length > 0){
+      let tempObj: any = JSON.parse(JSON.stringify(this.selectedFilters));
+      for (let prop in tempObj) {
+        if(tempObj[prop] == "0"){
+          delete tempObj[prop];
+        }
+      }
+      const queryParams: Params = tempObj;
+      this.router.navigate([this.router.url.split('?')[0]],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: queryParams,
+        }
+      );
     }
-    const queryParams: Params = tempObject;
-    this.router.navigate([this.router.url.split('?')[0]],
-      {
-        relativeTo: this.activatedRoute,
-        queryParams: queryParams,
-       // queryParamsHandling: 'merge', // remove to replace all query params by provided
-      });
   }
 
   setGeneralSubscription(){
     this.setFilterParams();
-    this.sharedConfigService.generalSubscriptionData = {"changeFor": "commonFilter", "data": {"country": this.selectedCountry, "city": this.selectedCity}};
+    this.sharedConfigService.generalSubscriptionData = {"changeFor": "commonFilter", "data": this.selectedFilters};
     this.sharedConfigService.detectGeneralSubscription();
   }
 

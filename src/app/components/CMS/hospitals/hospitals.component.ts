@@ -20,7 +20,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   public reportData: any = [];
 
   // Numeric
-  public cardPerRow: number = 5;
+  public cardPerRow: number = 3;
   public totalRecords: number = 0;
 
 
@@ -56,7 +56,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
       "hospitalList": [],
       "languageId": 1
     };
-    this.cmsService.getHospitalsList(reqPayload).subscribe((result: any) => {
+    this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.reportData = [];
       this.selectedCard = {};
       this.totalRecords = 0;

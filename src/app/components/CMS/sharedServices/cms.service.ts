@@ -20,12 +20,22 @@ export class CmsService {
     return this.http.get(url);
   }
 
+  getTreatmentList(){
+    let url: string = `Treatment/1/list`;
+    return this.http.get(url);
+  }
+
+  getDepartmentList(){
+    let url: string = `Department/list`;
+    return this.http.get(url);
+  }
+
   getDoctorsList(payload:any){
     let url: string = `Doctor/list`;
     return this.http.post(url, payload);
   }
 
-  getHospitalsList(payload:any){
+  getHospitalList(payload:any){
     let url: string = `Hospital/list`;
     return this.http.post(url, payload);
   }

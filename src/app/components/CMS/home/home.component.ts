@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if(item.data && Object.keys(item.data).length > 0){
           this.selectedFilter = JSON.parse(JSON.stringify(item.data));
         }
-        this.getHospitalsList();
+        this.getHospitalList();
         this.getDoctorsList();
         this.sharedConfigService.generalSubscriptionData = {};
         this.sharedConfigService.detectGeneralSubscription();
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.generalSubscription.unsubscribe();
   }
 
-  getHospitalsList() {
+  getHospitalList() {
     let reqPayload: any = {
       "searchText": "",
       "countryId": this.selectedFilter.country,
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       "hospitalList": [],
       "languageId": 1
     };
-    this.cmsService.getHospitalsList(reqPayload).subscribe((result: any) => {
+    this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.hospitalList = [];
       if (result && result.length > 0) {
         result.map((item: any) => {

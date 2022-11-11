@@ -74,6 +74,7 @@ export class MainHeaderComponent implements OnInit {
   }
 
   pageNavigation(page:string){
+    this.selectedMenu = page;
     let selectedFilters: any = {};
     if(this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParamMap && Object.keys(this.activatedRoute.snapshot.queryParamMap).length > 0){
       selectedFilters = this.activatedRoute.snapshot.queryParamMap;

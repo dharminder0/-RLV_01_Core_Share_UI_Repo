@@ -2,19 +2,31 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
-                <select class="form-select h-100" [(ngModel)]="selectedCountry" (ngModelChange)="selectedCity = 0;getCityList()">
+                <select class="form-select h-100" [(ngModel)]="selectedFilters.country" (ngModelChange)="changeCounrty()">
                     <option selected disabled>Select Country</option>
                     <option [value]="item.id" *ngFor="let item of countryList" [title]="item.countryName">{{item.countryName}}</option>
                 </select>
             </div>
             <div class="col-sm-5">
-                <select class="form-select h-100" [(ngModel)]="selectedCity">
+                <select class="form-select h-100" [(ngModel)]="selectedFilters.city">
                     <option selected [value]="0">All cities</option>
                     <option [value]="item.id" *ngFor="let item of cityList" [title]="item.cityName">{{item.cityName}}</option>
                 </select>
             </div>
+            <!-- <div class="col-sm-4">
+                <select class="form-select h-100" [(ngModel)]="selectedFilters.treatment">
+                    <option selected [value]="0">All cities</option>
+                    <option [value]="item.id" *ngFor="let item of treatmentList" [title]="item.treatmentName">{{item.treatmentName}}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <select class="form-select h-100" [(ngModel)]="selectedFilters.hospital">
+                    <option selected [value]="0">All cities</option>
+                    <option [value]="item.id" *ngFor="let item of hospitalList" [title]="item.title">{{item.title}}</option>
+                </select>
+            </div> -->
             <div class="col-sm-2">
-                <button class="btn btn-primary" [disabled]="!selectedCountry" (click)="setGeneralSubscription()">Search</button>
+                <button class="btn btn-primary" [disabled]="!selectedFilters.country" (click)="setGeneralSubscription()">Search</button>
             </div>
         </div>
     </div>

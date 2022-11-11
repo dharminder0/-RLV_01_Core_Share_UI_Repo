@@ -1,0 +1,21 @@
+<div id="accordion" class="product-filters">
+    <div class="card border-0" *ngFor="let item of filterCategoriesCopy">
+        <a class="card-header rounded-0 collapsed ellipsis link p-all-15" data-bs-toggle="collapse" [href]="'#'+item.code" [title]="item.title">
+            <span>{{item.title}}</span>
+            <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
+        </a>
+        <div [id]="item.code" class="collapse" data-bs-parent="#accordion">
+            <div class="card-body p-0" *ngIf="item.code !== 'hospitalAge' && item.code !== 'BedsRange'">
+                <div class="card border-0" *ngFor="let subItem of filterData[item.code]">
+                    <div class="card-header link pointer rounded-0 ellipsis p-all-15" [title]="subItem.title"> 
+                        <mat-checkbox (change)="updateFilter(item.code, subItem.id)"><div>{{subItem.title}}</div></mat-checkbox>
+                    </div>
+                </div>
+                <div class="card-header text-center fw-normal" *ngIf="!filterData[item.code] || filterData[item.code] && filterData[item.code].length <=0">No data availble</div>
+            </div>
+            <div class="card-body" *ngIf="item.code == 'hospitalAge' || item.code == 'BedsRange'">
+                <ngx-slider [(value)]="selectedFilters[item.code].minValue" [(highValue)]="selectedFilters[item.code].maxValue" [options]="sliderOptions"></ngx-slider>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,7 +21,7 @@ export class DoctorsComponent implements OnInit, OnDestroy {
   public reportData: any = [];
 
   // Numeric
-  public cardPerRow: number = 5;
+  public cardPerRow: number = 3;
   public totalRecords: number = 0;
 
 

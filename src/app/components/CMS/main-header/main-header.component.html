@@ -1,5 +1,5 @@
 <header>
-  <section class="first-row p-all-10">
+  <section class="first-row p-all-10" *ngIf="!isMobile">
     <div class="container topbar d-flex flex-wrap">
       <div class="topbar-left">
         <a class="navbar-brand mr-auto"  href="javascript:void(0)" (click)="pageNavigation('home')">
@@ -7,7 +7,7 @@
         </a>
       </div>
       <div class="topbar-right mleft-auto align-items-center d-flex">
-        <div class="call-to-action" *ngIf="!isMobile">
+        <div class="call-to-action">
           <div class="d-inline-flex">
             <svg class="mright-5 mtop-8" id="phone" xmlns="http://www.w3.org/2000/svg" width="29.824" height="29.79"
               viewBox="0 0 29.824 29.79">
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div> 
-        <div class="call-to-action mleft-45" *ngIf="!isMobile">
+        <div class="call-to-action mleft-45">
           <div class="d-inline-flex">
             <svg class="mright-5 mtop-8" xmlns="http://www.w3.org/2000/svg" width="26.12" height="26.12"
               viewBox="0 0 26.12 26.12">
@@ -66,7 +66,29 @@
   </section>
   <section class="second-row p-all-10">
     <div class="container">
-      <div class="row">
+      <nav class="navbar navbar-expand-sm">
+        <div class="container-fluid p-0">
+          <a class="navbar-brand"  href="javascript:void(0)" *ngIf="isMobile">
+            <img class="brand-logo" [src]="headerDetails.logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <form class="d-flex search-area">
+              <input class="form-control me-2" type="text" placeholder="Search by disease, procedure, doctor or hospital">
+              <fa-icon class="search-icon pointer" [icon]="faSearch"></fa-icon>
+            </form>
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item" *ngFor="let menu of headerMenu">
+                <a class="nav-link" href="javascript:void(0)" [ngClass]="{'active': selectedMenu == menu.code}" (click)="pageNavigation(menu.code)">{{menu.label}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="row" *ngIf="false">
         <div class="col-sm-3">
           <div class="search-area mtop-5">
             <input class="fs-12" type="text" name="search"

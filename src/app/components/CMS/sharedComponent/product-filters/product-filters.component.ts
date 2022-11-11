@@ -1,5 +1,5 @@
 import { Options } from '@angular-slider/ngx-slider';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { CmsService } from '../../sharedServices/cms.service';
 
@@ -9,7 +9,8 @@ import { CmsService } from '../../sharedServices/cms.service';
   styleUrls: ['./product-filters.component.scss']
 })
 export class ProductFiltersComponent implements OnInit {
-
+  @Input() filterVisibleFor:string="";
+  
   minValue: number = 50;
   maxValue: number = 200;
   sliderOptions: Options = {
@@ -22,27 +23,42 @@ export class ProductFiltersComponent implements OnInit {
   public filterData: any = {};
   public selectedFilters: any = {};
 
-  public filterCategories: any = [
-    {"code": "department", "title": "Department", "isAllowed": true},
-    {"code": "treatment", "title": "Treatment", "isAllowed": true},
-    {"code": "hospitalAge", "title": "Hospital age", "isAllowed": true},
-    {"code": "BedsRange", "title": "Beds range", "isAllowed": true},
-    //{"code": "experience", "title": "Experience", "isAllowed": false}
+  public filterCategoriesCopy: any = [];
+  public filterCategoriesOrg: any = [
+    {"code": "department", "title": "Department"},
+    {"code": "treatment", "title": "Treatment"},
+    {"code": "hospitalAge", "title": "Hospital age"},
+    {"code": "BedsRange", "title": "Beds range"},
+    {"code": "experience", "title": "Experience"}
   ];
 
-  constructor(private cmsService: CmsService) {
-    this.filterCategories.map((item:any) => {
+  constructor(private cmsService: CmsService) {}
+
+  ngOnInit(): void {
+    this.getFilterList();
+    this.getDepartmentList();
+    this.getTreatmentList();
+  }
+
+  getFilterList(){
+    this.filterCategoriesCopy = this.filterCategoriesOrg.filter((item:any) => {
       this.filterData[item.code] = [];
       this.selectedFilters[item.code] = [];
       if(item.code == 'hospitalAge' || item.code == 'BedsRange'){
         this.selectedFilters[item.code] = {"minValue": this.minValue,"maxValue": this.maxValue}
       }
-    });
-   }
 
-  ngOnInit(): void {
-    this.getDepartmentList();
-    this.getTreatmentList();
+      if(this.filterVisibleFor == 'hospitals'){
+        if(item.code !== 'experience'){
+          return item;
+        }
+      }
+      else if(this.filterVisibleFor == 'doctors'){
+        if(item.code !== 'hospitalAge' && item.code !== 'BedsRange'){
+          return item;
+        }
+      }
+    });
   }
 
   getDepartmentList(){

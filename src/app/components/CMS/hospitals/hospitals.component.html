@@ -19,7 +19,7 @@
   <div class="container p-0">
     <div class="row">
       <div class="col-sm-3">
-        <app-product-filters></app-product-filters>
+        <app-product-filters [filterVisibleFor]="'hospitals'"></app-product-filters>
       </div>
       <div class="col-sm-9 pleft-50">
         <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">

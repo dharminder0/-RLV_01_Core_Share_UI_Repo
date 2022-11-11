@@ -1,5 +1,5 @@
 <div id="accordion" class="product-filters">
-    <div class="card border-0" *ngFor="let item of filterCategories">
+    <div class="card border-0" *ngFor="let item of filterCategoriesCopy">
         <a class="card-header rounded-0 collapsed ellipsis link p-all-15" data-bs-toggle="collapse" [href]="'#'+item.code" [title]="item.title">
             <span>{{item.title}}</span>
             <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>

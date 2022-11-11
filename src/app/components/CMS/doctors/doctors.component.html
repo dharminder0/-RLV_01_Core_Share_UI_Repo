@@ -19,10 +19,10 @@
 <section class="card-view">
   <div class="container p-0">
     <div class="row">
-      <div class="col-sm-4">
-        <app-product-filters></app-product-filters>
+      <div class="col-sm-3">
+        <app-product-filters [filterVisibleFor]="'doctors'"></app-product-filters>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-9 pleft-50">
         <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">
           <div class="card fs-12 fw-normal m-all-5 d-inline-block pointer border-0"
             *ngFor="let item of reportData | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)"

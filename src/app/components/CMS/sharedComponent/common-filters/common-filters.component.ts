@@ -26,8 +26,6 @@ export class CommonFiltersComponent implements OnInit {
       let tempObj:any = this.activatedRoute.snapshot.queryParamMap;
       this.selectedFilters.country = tempObj.get('country')?tempObj.get('country'):"IN";
       this.selectedFilters.city =  tempObj.get('city')?parseInt(tempObj.get('city')):0;
-      this.selectedFilters.treatment =  tempObj.get('treatment')?parseInt(tempObj.get('treatment')):0;
-      this.selectedFilters.hospital =  tempObj.get('hospital')?parseInt(tempObj.get('hospital')):0;
     }
   }
 

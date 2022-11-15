@@ -28,14 +28,15 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
 
   public filterData: any = {};
   public selectFiltersObj: any = {};
+  public selectedCommonFilter: any = {};
   public searchBy: any = {};
 
   public filterCategoriesCopy: any = [];
   public filterCategoriesOrg: any = [
     {"code": "speciality", "title": "Speciality", "type": "string"},
     {"code": "treatment", "title": "Treatment", "type": "string"},
-    {"code": "hospitalAge", "title": "Hospital age", "type": "numeric"},
-    {"code": "bedsRange", "title": "Beds range", "type": "numeric"},
+    {"code": "establishedYear", "title": "Established year", "type": "numeric"},
+    {"code": "bedCount", "title": "Bed count", "type": "numeric"},
     {"code": "experience", "title": "Experience", "type": "numeric"}
   ];
   public selectedFilterList:any = [];
@@ -43,9 +44,6 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
   constructor(private cmsService: CmsService, private sharedConfigService: SharedConfigService) {}
 
   ngOnInit(): void {
-    this.getFilterList();
-    this.getSpecialityList();
-    this.getTreatmentList();
     this.detectGeneralSubscription();
   }
 
@@ -63,7 +61,7 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
             tempArray.push(data.code);
           });
           for (let key in this.selectFiltersObj){
-            if(key === 'hospitalAge' || key === 'bedsRange' || key === 'experience'){
+            if(key === 'establishedYear' || key === 'bedCount' || key === 'experience'){
               if(!tempArray.includes(key)){
                 this.selectFiltersObj[key] = {"minValue": this.minValue,"maxValue": this.maxValue};
               }
@@ -74,6 +72,19 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
               }
             }
           }
+        }
+        this.sharedConfigService.generalSubscriptionData = {"changeFor": "sendProductFilter", "data": this.selectFiltersObj};
+        this.sharedConfigService.detectGeneralSubscription();
+      }
+      if (item && item.changeFor && item.changeFor === "commonFilter") {
+        if(item.data && Object.keys(item.data).length > 0){
+          if(this.selectedCommonFilter.country !== item.data.country){
+            this.selectedCommonFilter = JSON.parse(JSON.stringify(item.data));
+            this.getFilterList();
+            this.getSpecialityList();
+            this.getTreatmentList();
+          }
+          
         }
         this.sharedConfigService.generalSubscriptionData = {};
         this.sharedConfigService.detectGeneralSubscription();
@@ -95,7 +106,7 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
         }
       }
       else if(this.filterVisibleFor == 'doctors'){
-        if(item.code !== 'hospitalAge' && item.code !== 'bedsRange'){
+        if(item.code !== 'establishedYear' && item.code !== 'bedCount'){
           return item;
         }
       }
@@ -103,7 +114,7 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
   }
 
   getSpecialityList(){
-    this.cmsService.getTreatmentList().subscribe((result: any) => {
+    this.cmsService.getSpecialityList(this.selectedCommonFilter.country).subscribe((result: any) => {
       this.filterData['speciality'] = [];
       if (result && result.length > 0) {
         this.filterData['speciality'] = [...result];
@@ -112,7 +123,7 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
   }
 
   getTreatmentList(){
-    this.cmsService.getTreatmentList().subscribe((result: any) => {
+    this.cmsService.getTreatmentList(this.selectedCommonFilter.country).subscribe((result: any) => {
       this.filterData['treatment'] = [];
       if (result && result.length > 0) {
         this.filterData['treatment'] = [...result];
@@ -167,6 +178,9 @@ export class ProductFiltersComponent implements OnInit, OnDestroy {
       }
       this.selectedFilterList.push(tempObj);
     }
+
+    this.sharedConfigService.generalSubscriptionData = {"changeFor": "sendProductFilter", "data": this.selectFiltersObj};
+    this.sharedConfigService.detectGeneralSubscription();
     this.sharedConfigService.generalSubscriptionData = {"changeFor": "addProductFilter", "data": this.selectedFilterList};
     this.sharedConfigService.detectGeneralSubscription();
   }

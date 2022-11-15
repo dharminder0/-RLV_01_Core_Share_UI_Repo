@@ -16,18 +16,38 @@
 </section>
 
 <section>
-  <div class="container p-0">
+  <div class="container">
     <app-selected-filters-view></app-selected-filters-view>
   </div>
 </section>
 
 <section class="card-view">
-  <div class="container p-0 position-relative">
+  <div class="container position-relative">
     <div class="row">
       <div class="col-sm-3">
         <app-product-filters [filterVisibleFor]="'hospitals'"></app-product-filters>
       </div>
       <div class="col-sm-9 pleft-50">
+        <div class="pagination-block text-right mtop-10">
+          <div class="pagination" *ngIf="reportViewCount > 1">
+            <ul>
+              <li>
+                <span [hidden]="pageNumber > totalReportCount">{{paginationStartRnage}}-{{paginationEndRnage}} van
+                  {{filteredReportCount}}</span>
+              </li>
+              <li>
+                <button class="btn btn-default btn-small" [ngClass]="{'disabled' : pageNumber <= 1}"
+                  (click)="pageNumber = pageNumber - 1; getReportData();">
+                  <i class="fa fa-caret-left" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-default btn-small" [ngClass]="{'disabled' : pageNumber >= reportViewCount}"
+                  (click)="pageNumber = pageNumber + 1; getReportData();">
+                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="card-row" *ngFor="let i of [].constructor(totalRecords); let index = index;">
           <div class="card fs-12 fw-normal m-all-5 d-inline-block pointer"
             *ngFor="let item of reportData | slice: (cardPerRow*index): ((cardPerRow*index)+cardPerRow)"

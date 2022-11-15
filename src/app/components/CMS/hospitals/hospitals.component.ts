@@ -14,7 +14,8 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   private generalSubscription:any = Subscription;
   // Objects
   public selectedCard: any = {};
-  public selectedFilter: any = {};
+  public selectedCommonFilter: any = {};
+  public selectedProductFilter: any = {};
 
   // Array
   public reportData: any = [];
@@ -22,6 +23,15 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   // Numeric
   public cardPerRow: number = 3;
   public totalRecords: number = 0;
+
+  // for pagination
+  public pageNumber: number = 1;
+  public pageSize: number = 10;
+  public totalReportCount: number = 0;
+  public reportViewCount: number = 0;
+  public filteredReportCount: number = 0;
+  public paginationStartRnage: any = (this.pageNumber - 1) * this.pageSize + 1;
+  public paginationEndRnage: any = (this.pageNumber - 1) * this.pageSize + this.pageSize;
 
 
   constructor(
@@ -32,9 +42,16 @@ export class HospitalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
-      if (item && item.changeFor && item.changeFor === "commonFilter") {
-        if(item.data && Object.keys(item.data).length > 0){
-          this.selectedFilter = JSON.parse(JSON.stringify(item.data));
+      if(item && item.changeFor && (item.changeFor === "commonFilter" || item.changeFor === "sendProductFilter")){
+        if(item.changeFor === "commonFilter"){
+          if(item.data && Object.keys(item.data).length > 0){
+            this.selectedCommonFilter = JSON.parse(JSON.stringify(item.data));
+          }
+        }
+        else if(item.changeFor === "sendProductFilter"){
+          if(item.data && Object.keys(item.data).length > 0){
+            this.selectedProductFilter = JSON.parse(JSON.stringify(item.data));
+          }
         }
         this.getReportData();
         this.sharedConfigService.generalSubscriptionData = {};
@@ -51,24 +68,54 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   getReportData() {
     let reqPayload: any = {
       "searchText": "",
-      "countryCode": this.selectedFilter.country,
-      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
+      "countryCode": this.selectedCommonFilter.country,
+      "cityList": this.selectedCommonFilter.city > 0?[this.selectedCommonFilter.city]:[],
       "hospitalList": [],
       "languageId": 1,
       "establishedYear": [],
       "bedCount": [],
       "specialityId": [],
       "treatmentIds": [],
-      "pageIndex": 1,
-      "pageSize": 100
+      "pageIndex": this.pageNumber,
+      "pageSize": this.pageSize
     }
+
+    // Hospital Established Year
+    if(this.selectedProductFilter.establishedYear && (this.selectedProductFilter.establishedYear.minValue != 0 || this.selectedProductFilter.establishedYear.maxValue != 250)){
+      reqPayload.establishedYear = [this.selectedProductFilter.establishedYear.minValue,this.selectedProductFilter.establishedYear.maxValue];
+    }
+    // Hospital Established Year
+    if (this.selectedProductFilter.bedCount && (this.selectedProductFilter.bedCount.minValue != 0 || this.selectedProductFilter.bedCount.maxValue != 250)) {
+      reqPayload.bedCount = [this.selectedProductFilter.bedCount.minValue, this.selectedProductFilter.bedCount.maxValue];
+    }
+    // Specialities
+    if(this.selectedProductFilter.speciality && this.selectedProductFilter.speciality.length > 0){
+      reqPayload.specialityId = [...this.selectedProductFilter.speciality];
+    }
+    // Treatments
+    if (this.selectedProductFilter.treatment && this.selectedProductFilter.treatment.length > 0) {
+      reqPayload.treatmentIds = [...this.selectedProductFilter.treatment];
+    }
+
     this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.reportData = [];
+      this.reportViewCount = 0;
       this.selectedCard = {};
       this.totalRecords = 0;
       if (result && result.length > 0) {
         this.reportData = [...result];
         this.totalRecords = Math.ceil(this.reportData.length / this.cardPerRow);
+      }
+      // for pagination
+      this.totalReportCount = result.total;
+      this.filteredReportCount = this.totalReportCount;
+      this.reportViewCount = Math.ceil(this.totalReportCount / this.pageSize);
+      this.paginationStartRnage = (this.pageNumber - 1) * this.pageSize + 1;
+      if (this.reportData.length < this.pageSize) {
+        this.paginationEndRnage = (this.pageNumber - 1) * this.pageSize + this.reportData.length;
+      }
+      else {
+        this.paginationEndRnage = (this.pageNumber - 1) * this.pageSize + this.pageSize;
       }
     });
   }

@@ -22,12 +22,12 @@
             }
 
             .custom-wide {
-                width: calc(100% - 70px);
+                width: 225px;
             }
         }
 
         .card-body {
-            max-height: 310px;
+            max-height: 280px;
             overflow: auto;
 
             .card-header {
@@ -57,13 +57,5 @@
         padding: 9px 6px;
         color: lightgray;
     }
-    // &:hover{
-    //     input, .search-icon {
-    //         border-color: var(--primary-color);
-    //     }
-    //     .search-icon {
-    //         color: var(--primary-color);
-    //     }
-    // }
         
 }

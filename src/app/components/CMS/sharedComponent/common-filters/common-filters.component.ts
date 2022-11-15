@@ -42,7 +42,6 @@ export class CommonFiltersComponent implements OnInit {
         this.countryList = [...result];
         this.getCityList(false);
       }
-      this.setGeneralSubscription();
     });
   }
 
@@ -56,12 +55,9 @@ export class CommonFiltersComponent implements OnInit {
         this.cityList = [...result];
       }
     });
+    this.setGeneralSubscription();
   }
-
-  changeCounrty(){
-    this.getCityList(true);
-  }
-
+  
   setFilterParams() {
     if(this.selectedFilters && Object.keys(this.selectedFilters).length > 0){
       let tempObj: any = JSON.parse(JSON.stringify(this.selectedFilters));

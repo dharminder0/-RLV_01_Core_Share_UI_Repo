@@ -15,7 +15,8 @@ export class DoctorsComponent implements OnInit, OnDestroy {
 
   // Objects
   public selectedCard: any = {};
-  public selectedFilter: any = {};
+  public selectedCommonFilter: any = {};
+  public selectedProductFilter: any = {};
 
   // Array
   public reportData: any = [];
@@ -42,9 +43,16 @@ export class DoctorsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
-      if (item && item.changeFor && item.changeFor === "commonFilter") {
-        if(item.data && Object.keys(item.data).length > 0){
-          this.selectedFilter = JSON.parse(JSON.stringify(item.data));
+      if(item && item.changeFor && (item.changeFor === "commonFilter" || item.changeFor === "sendProductFilter")){
+        if(item.changeFor === "commonFilter"){
+          if(item.data && Object.keys(item.data).length > 0){
+            this.selectedCommonFilter = JSON.parse(JSON.stringify(item.data));
+          }
+        }
+        else if(item.changeFor === "sendProductFilter"){
+          if(item.data && Object.keys(item.data).length > 0){
+            this.selectedProductFilter = JSON.parse(JSON.stringify(item.data));
+          }
         }
         this.getReportData();
         this.sharedConfigService.generalSubscriptionData = {};
@@ -60,8 +68,8 @@ export class DoctorsComponent implements OnInit, OnDestroy {
   getReportData() {
     let reqPayload: any = {
       "searchText": "",
-      "countryCode": this.selectedFilter.country,
-      "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
+      "countryCode": this.selectedCommonFilter.country,
+      "cityList": this.selectedCommonFilter.city > 0?[this.selectedCommonFilter.city]:[],
       "hospitalList": [],
       "languageId": 1,
       "yearExperience": [],
@@ -69,6 +77,19 @@ export class DoctorsComponent implements OnInit, OnDestroy {
       "treatmentIds": [],
       "pageIndex": this.pageNumber,
       "pageSize": this.pageSize
+    }
+
+    // Doctor Experience
+    if(this.selectedProductFilter.experience && (this.selectedProductFilter.experience.minValue != 0 || this.selectedProductFilter.experience.maxValue != 250)){
+      reqPayload.yearExperience = [this.selectedProductFilter.experience.minValue,this.selectedProductFilter.experience.maxValue];
+    }
+    // Specialities
+    if(this.selectedProductFilter.speciality && this.selectedProductFilter.speciality.length > 0){
+      reqPayload.specialityId = [...this.selectedProductFilter.speciality];
+    }
+    // Treatments
+    if (this.selectedProductFilter.treatment && this.selectedProductFilter.treatment.length > 0) {
+      reqPayload.treatmentIds = [...this.selectedProductFilter.treatment];
     }
 
     this.cmsService.getDoctorsList(reqPayload).subscribe((result: any) => {

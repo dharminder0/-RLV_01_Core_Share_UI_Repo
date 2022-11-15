@@ -20,13 +20,13 @@ export class CmsService {
     return this.http.get(url);
   }
 
-  getTreatmentList(){
-    let url: string = `Treatment/1/list`;
+  getTreatmentList(countryCode:String){
+    let url: string = `Treatment/${countryCode}/list`;
     return this.http.get(url);
   }
 
-  getSpecialityList(){
-    let url: string = `Speciality/list`;
+  getSpecialityList(countryCode:String){
+    let url: string = `Speciality/${countryCode}/specialityList`;
     return this.http.get(url);
   }
 

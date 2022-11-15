@@ -47,6 +47,13 @@ body{
     white-space: normal;
     height: 100vh;
     overflow: hidden;
+    //background-color: #f3f3f3;
+    font-family: 'Open Sans', sans-serif;
+    html, body { height: 100%; }
+    p {
+        font-weight: 400;
+        line-height: 27px;
+    }
 }
 
 .primary-color{
@@ -75,5 +82,3 @@ body{
 @import "assets/scss/helper";
 @import "assets/scss/main";
 @import "assets/scss/card-view";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

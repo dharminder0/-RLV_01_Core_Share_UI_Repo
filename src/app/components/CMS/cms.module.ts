@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ApplicationPipes } from '../shared/pipes/CustomPipes';
 import { SelectedFiltersViewComponent } from './sharedComponent/selected-filters-view/selected-filters-view.component';
+import { CommonLoaderComponent } from './sharedComponent/common-loader/common-loader.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SelectedFiltersViewComponent } from './sharedComponent/selected-filters
     CommonFiltersComponent,
     HospitalDetailsComponent,
     ProductFiltersComponent,
-    SelectedFiltersViewComponent
+    SelectedFiltersViewComponent,
+    CommonLoaderComponent
   ],
   imports: [
     CommonModule,

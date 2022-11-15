@@ -1,23 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SharedConfigService } from '../../sharedServices/shared-config.service';
 
 @Component({
   selector: 'app-selected-filters-view',
   templateUrl: './selected-filters-view.component.html',
   styleUrls: ['./selected-filters-view.component.scss']
 })
-export class SelectedFiltersViewComponent implements OnInit {
+export class SelectedFiltersViewComponent implements OnInit, OnDestroy {
+  
+  private generalSubscription:any = Subscription;
+  public selectedFilterList: any = [];
 
-  public selectedFilterList: any = [
-    {"code": "speciality", "title": "Speciality", "type": "string", "value": "text One"},
-    {"code": "treatment", "title": "Treatment", "type": "string", "value": "text Two, text Three"},
-    {"code": "hospitalAge", "title": "Hospital age", "type": "numeric", "minValue": "2001","maxValue": "2010"},
-    {"code": "BedsRange", "title": "Beds range", "type": "numeric", "minValue": "100","maxValue": "200"},
-    {"code": "experience", "title": "Experience", "type": "numeric", "minValue": "5","maxValue": "10"}
-  ];
-
-  constructor() { }
+  constructor(private sharedConfigService: SharedConfigService) { }
 
   ngOnInit(): void {
+    this.detectGeneralSubscription();
+  }
+
+  ngOnDestroy(){
+    this.generalSubscription.unsubscribe();
+  }
+
+  detectGeneralSubscription() {
+    this.generalSubscription = this.sharedConfigService.generalObservable.subscribe((item: any) => {
+      if (item && item.changeFor && item.changeFor === "addProductFilter") {
+        if (item.data && item.data.length > 0) {
+          this.selectedFilterList = item.data.filter((data: any) => {
+            if (data.type === 'numeric') {
+              if (data.minValue !== 0 || data.maxValue !== 250) {
+                return data;
+              }
+            }
+            else {
+              if (data.value && data.value.length > 0) {
+                return data;
+              }
+            }
+          })
+        }
+        else {
+          this.selectedFilterList = [];
+        }
+        this.sharedConfigService.generalSubscriptionData = {};
+        this.sharedConfigService.detectGeneralSubscription();
+      }
+    });
   }
 
   removeSelectedFilter(code:string) {
@@ -25,7 +53,9 @@ export class SelectedFiltersViewComponent implements OnInit {
       if(item.code !== code){
         return item;
       }
-    })
+    });
+    this.sharedConfigService.generalSubscriptionData = {"changeFor": "removeProductFilter", "data": this.selectedFilterList};
+    this.sharedConfigService.detectGeneralSubscription();
   }
 
 }

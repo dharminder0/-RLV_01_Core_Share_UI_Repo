@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
+  public isLoaderEnabled: boolean = true;;
+
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoaderEnabled = false;
+    }, 1000);
   }
 
 }

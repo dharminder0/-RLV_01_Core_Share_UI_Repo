@@ -61,8 +61,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
-      "languageId": 1
-    };
+      "languageId": 1,
+      "establishedYear": [],
+      "bedCount": [],
+      "specialityId": [],
+      "treatmentIds": [],
+      "pageIndex": 1,
+      "pageSize": 100
+    }
     this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.hospitalList = [];
       if (result && result.length > 0) {
@@ -77,8 +83,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
-      "languageId": 1
-    };
+      "languageId": 1,
+      "yearExperience": [],
+      "specialityId": [],
+      "treatmentIds": [],
+      "pageIndex": 1,
+      "pageSize": 100
+    }
     this.cmsService.getDoctorsList(reqPayload).subscribe((result: any) => {
       this.doctorsList = [];
       if (result && result.length > 0) {

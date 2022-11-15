@@ -49,13 +49,19 @@ export class HospitalsComponent implements OnInit, OnDestroy {
 
 
   getReportData() {
-    let reqPayload:any = {
+    let reqPayload: any = {
       "searchText": "",
       "countryCode": this.selectedFilter.country,
       "cityList": this.selectedFilter.city > 0?[this.selectedFilter.city]:[],
       "hospitalList": [],
-      "languageId": 1
-    };
+      "languageId": 1,
+      "establishedYear": [],
+      "bedCount": [],
+      "specialityId": [],
+      "treatmentIds": [],
+      "pageIndex": 1,
+      "pageSize": 100
+    }
     this.cmsService.getHospitalList(reqPayload).subscribe((result: any) => {
       this.reportData = [];
       this.selectedCard = {};

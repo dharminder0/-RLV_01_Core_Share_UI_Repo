@@ -8,6 +8,7 @@ import { PatientModule } from './components/Patient/patient.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { Config } from '../config';
 import { HttpInterceptProviders } from '../assets/interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { HttpInterceptProviders } from '../assets/interceptor';
     PatientModule,
     BrowserAnimationsModule
   ],
-  providers: [Config, HttpInterceptProviders],
+  providers: [Config, HttpInterceptProviders,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
